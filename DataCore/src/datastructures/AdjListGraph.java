@@ -68,4 +68,10 @@ public class AdjListGraph extends Graph {
 		}
 		return vertList;
 	}
+
+	@Override
+	protected List<String> implementToStringList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

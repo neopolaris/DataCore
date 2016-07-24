@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+package datastructures;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Vaygr
+ *
+ */
+public class AdjListGraphBuilder extends Builder {
+
+	private AdjListGraph graph = null;
+	private List<String> inputList = null;
+	
+	/**
+	 * Default constructor
+	 */
+	public AdjListGraphBuilder(){
+		this(null);
+	}
+	
+	/**
+	 * Overloaded constructor
+	 */
+	public AdjListGraphBuilder(List<String> input) {
+		inputList = new ArrayList<String>();
+		graph = new AdjListGraph();
+	}
+
+	/* (non-Javadoc)
+	 * @see datastructures.Builder#build()
+	 */
+	@Override
+	public AdjListGraph build() {
+		// TODO Auto-generated method stub
+		for ( String inputStr : inputList ){
+			// Use regular expression to split the string based on token " -> "
+			// The first part is the vertex, so add it.
+			// Iterate the remaining parts and split based on ","
+			// Then split the parts again based on ":"
+			// The remaining parts will be end vertex of the edge and corresponding weight.
+			//StringMath sm = new StringMatch();
+		}
+		return graph;
+	}
+
+}

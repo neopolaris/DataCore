@@ -34,8 +34,13 @@ public abstract class Graph {
 		return false;
 	}
 	
+	public List<String> toStringList(){
+		return implementToStringList();
+	}
+	
 	protected abstract boolean implementAddVertex(Vertex v);
 	protected abstract boolean implementAddEdge(Edge e);
 	protected abstract List<Vertex> implementGetNextNeighbors(Vertex v);
+	protected abstract List<String> implementToStringList();
 
 }
