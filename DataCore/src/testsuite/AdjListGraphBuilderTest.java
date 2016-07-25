@@ -3,8 +3,6 @@
  */
 package testsuite;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.After;
@@ -66,7 +64,8 @@ public class AdjListGraphBuilderTest {
 		AdjListGraph alModGraph = algModBuilder.build();
 		List<String> modGList = alModGraph.toStringList();
 		
-				
+		System.out.println(simpleGList.toString());
+		System.out.println(modGList.toString());
 	}
 
 }

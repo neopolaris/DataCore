@@ -4,21 +4,11 @@
 package testsuite;
 
 import static org.junit.Assert.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import datastructures.AdjListGraphBuilder;
-import utils.StringMatch;
 
 /**
  * @author Vaygr
@@ -26,7 +16,7 @@ import utils.StringMatch;
  */
 public class StringMatchTest {
 	
-	private List<String> simpleList = null;
+	//private List<String> simpleList = null;
 	/**
 	 * @throws java.lang.Exception
 	 */
