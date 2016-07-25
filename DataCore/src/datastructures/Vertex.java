@@ -42,4 +42,18 @@ public abstract class Vertex {
 	public String getVertexName(){
 		return vertexName;
 	}
+	
+	
+	public boolean equals(Object v){
+		if ( v instanceof Vertex ){
+			Vertex rhs = (Vertex)v;
+			return vertexName.equals(rhs.vertexName);
+		}
+		return false;
+	}
+	
+
+	public int hashCode(){
+		return vertexName.hashCode();
+	}
 }

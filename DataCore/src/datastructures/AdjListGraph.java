@@ -42,9 +42,15 @@ public class AdjListGraph extends Graph {
 	@Override
 	protected boolean implementAddEdge(Edge e) {
 		// If the starting vertex is already in the graph find it
-		// And get the list of edges.
-		Set<Edge> edges = edgeList.get(e.getStartVertex());
+		// And get the list of edges. Otherwise, add the starting
+		// vertex into the graph.
+		Vertex sV = e.getStartVertex();
+		Vertex eV = e.getEndVertex();
+		Set<Edge> edges = edgeList.get(sV);
 		if ( edges != null ){
+			if ( !edgeList.containsKey(eV)){
+				addVertex(eV);
+			}
 			if ( !edges.contains(e)){
 				edges.add(e);
 				return true;
@@ -71,7 +77,21 @@ public class AdjListGraph extends Graph {
 
 	@Override
 	protected List<String> implementToStringList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> edgeStrList = new ArrayList<String>();
+		Set<Vertex> vertices = edgeList.keySet();
+		for ( Vertex sV : vertices ){
+			StringBuilder sb = new StringBuilder(sV.getVertexName());
+			sb.append("->");
+			Set<Edge> edges = edgeList.get(sV);
+			for ( Edge e : edges ){
+				Vertex eV = e.getOtherVertex(sV);
+				sb.append(eV.getVertexName());
+				sb.append(":");
+				sb.append(e.getWeight());
+				sb.append(',');
+			}
+			edgeStrList.add(sb.toString());
+		}
+		return edgeStrList;
 	}
 }

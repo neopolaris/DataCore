@@ -5,6 +5,9 @@ package datastructures;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import utils.StringMatch;
 
 /**
  * @author Vaygr
@@ -26,7 +29,7 @@ public class AdjListGraphBuilder extends Builder {
 	 * Overloaded constructor
 	 */
 	public AdjListGraphBuilder(List<String> input) {
-		inputList = new ArrayList<String>();
+		inputList = input;
 		graph = new AdjListGraph();
 	}
 
@@ -42,7 +45,22 @@ public class AdjListGraphBuilder extends Builder {
 			// Iterate the remaining parts and split based on ","
 			// Then split the parts again based on ":"
 			// The remaining parts will be end vertex of the edge and corresponding weight.
-			//StringMath sm = new StringMatch();
+			String patStr = "->";
+			String[] tokens = inputStr.split(patStr);
+			String vertStr = tokens[0];
+			String edgeStr = tokens[1];
+			SimpleVertex sVert = new SimpleVertex(vertStr); 
+			graph.addVertex(sVert);
+			String[] edgeTokens = edgeStr.split(",");
+			for ( String edgeToken : edgeTokens ){
+				// Now split it using ":"
+				String[] edgeVals = edgeToken.split(":");
+				String eVertVal = edgeVals[0];
+				String wgtVal = edgeVals[1];
+				SimpleVertex eVert = new SimpleVertex(eVertVal);
+				SimpleEdge sEdge = new SimpleEdge(sVert, eVert, Double.parseDouble(wgtVal));
+				graph.addEdge(sEdge);
+			}
 		}
 		return graph;
 	}

@@ -10,22 +10,12 @@ package datastructures;
 public abstract class Edge {
 	protected Vertex sVertex = null;
 	protected Vertex eVertex = null;
-	protected double weight = 0.0;
 	
 	/**
 	 * Default Constructor.
 	 */
 	public Edge(){
-		this(null, null, 0.0);
-	}
-	
-	/**
-	 * Overloaded constructor.
-	 * @param s - Starting Vertex.
-	 * @param e - Ending Vertex.
-	 */
-	public Edge(Vertex s, Vertex e){
-		this(s,e, 0.0);
+		this(null, null);
 	}
 	
 	/**
@@ -34,10 +24,9 @@ public abstract class Edge {
 	 * @param e - Ending Vertex.
 	 * @param w - Weight of the edge.
 	 */
-	public Edge( Vertex s, Vertex e, double w){
+	public Edge( Vertex s, Vertex e){
 		sVertex = s;
 		eVertex = e;
-		weight = w;
 	}
 	
 	/**
@@ -73,4 +62,35 @@ public abstract class Edge {
 	public Vertex getEndVertex(){
 		return eVertex;
 	}
+	
+	/**
+	 * Get the weight of the edge if there is one.
+	 * @return
+	 */
+	public double getWeight(){
+		return implementGetWeight();
+	}
+	
+	/**
+	 * Get a particular property of edge based on its name
+	 * @return
+	 */
+	public Object getProperty(String key){
+		return implementGetProperty(key);
+	}
+	
+	/**
+	 * Set a particular property given its name.
+	 * @param key - The string name of the property
+	 * @param value - Object representing the value;
+	 * @return
+	 */
+	public boolean setProperty(String key, Object value){
+		return implementSetProperty(key, value);
+	}
+	
+	public abstract double implementGetWeight();
+	public abstract Object implementGetProperty(String key);
+	public abstract boolean implementSetProperty(String key, Object value);
+	
 }
