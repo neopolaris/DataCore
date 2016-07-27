@@ -38,6 +38,16 @@ public abstract class Graph {
 		return implementToStringList();
 	}
 	
+	public void doDFS(Visitor v){
+		implementDoDFS(v);
+	}
+	
+	public void doBFS(Visitor v){
+		implementDoBFS(v);
+	}
+	
+	protected abstract void implementDoDFS(Visitor v);
+	protected abstract void implementDoBFS(Visitor v);
 	protected abstract boolean implementAddVertex(Vertex v);
 	protected abstract boolean implementAddEdge(Edge e);
 	protected abstract List<Vertex> implementGetNextNeighbors(Vertex v);
