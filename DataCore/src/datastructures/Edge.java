@@ -89,8 +89,28 @@ public abstract class Edge {
 		return implementSetProperty(key, value);
 	}
 	
-	public abstract double implementGetWeight();
-	public abstract Object implementGetProperty(String key);
-	public abstract boolean implementSetProperty(String key, Object value);
+	/**
+	 * Override for comparing two edge objects. At the
+	 * minimum, two edges are equal iff two vertices
+	 * are equal.
+	 */
+	public boolean equals(Object e){
+		if ( e != null && e instanceof Edge ){
+			Edge edg = (Edge)e;
+			return ( sVertex.equals(edg.getStartVertex()) && eVertex.equals(edg.getEndVertex()));
+		}
+		return false;
+	}
+	
+	/**
+	 * Override for generating hash codes for edges.
+	 */
+	public int hashCode(){
+		return ( sVertex.hashCode() ^ eVertex.hashCode());
+	}
+	
+	protected abstract double implementGetWeight();
+	protected abstract Object implementGetProperty(String key);
+	protected abstract boolean implementSetProperty(String key, Object value);
 	
 }

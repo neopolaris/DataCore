@@ -43,7 +43,9 @@ public abstract class Vertex {
 		return vertexName;
 	}
 	
-	
+	/**
+	 * Override for equality operation of two vertices.
+	 */
 	public boolean equals(Object v){
 		if ( v instanceof Vertex ){
 			Vertex rhs = (Vertex)v;
@@ -52,7 +54,9 @@ public abstract class Vertex {
 		return false;
 	}
 	
-
+	/**
+	 * Generate hash code for this vertex.
+	 */
 	public int hashCode(){
 		return vertexName.hashCode();
 	}
