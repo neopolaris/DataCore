@@ -4,6 +4,7 @@
 package datastructures;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -63,7 +64,7 @@ public class GTree extends Tree {
 
 	@Override
 	protected TreeVertex implementFindTreeVertex(String name) {
-		// TODO Auto-generated method stub
+		// TODO: implement this method.
 		return null;
 	}
 	
@@ -73,17 +74,18 @@ public class GTree extends Tree {
 	 * @param op - An operator with certain operation to perform visit.
 	 */
 	private void doDFS(TreeVertex v, VertexOperator op){
-		if ( v.isLeaf() ){
-			return;
-		}
-		else {
-			//visitPreOrder(v, op);
+		//if ( v == null ){
+		///}
+		visitPreOrder(v, op);
+		if ( !v.isLeaf() ){
 			for ( TreeVertex tVertex : v.getNextNeighbors() ){
 				doDFS(tVertex, op);
-				visitInOrder(tVertex, op);
+				// Note: This only makes sense for binary trees
+				visitInOrder(v, op); 
 			}
-			//visitPostOrder(v, op);
+			
 		}
+		visitPostOrder(v, op);
 	}
 	
 	private void visitPostOrder(TreeVertex v, VertexOperator op) {
@@ -105,7 +107,15 @@ public class GTree extends Tree {
 	}
 
 	private void doBFS(TreeVertex v, VertexOperator op){
-		//LinkedList<>
+		LinkedList<TreeVertex> q = new LinkedList<TreeVertex>();
+		q.add(v);
+		while ( !q.isEmpty() ){
+			TreeVertex curV = q.removeFirst();
+			if ( !curV.isLeaf() ) {
+				q.addAll(curV.getNextNeighbors());
+			}
+			visitVertex(curV,op);
+		}
 	}
 
 	private void visitVertex(TreeVertex v, VertexOperator op){

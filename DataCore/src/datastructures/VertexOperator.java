@@ -19,10 +19,10 @@ public abstract class VertexOperator extends Visitor {
 	/* (non-Javadoc)
 	 * @see datastructures.Visitor#implementOperate(java.lang.Object)
 	 */
-	@Override
-	protected void implementOperate(Object v) {
+	//@Override
+	//protected abstract void implementOperate(TreeVertex v);// {
 		// TODO Auto-generated method stub
 
-	}
+	//}
 
 }

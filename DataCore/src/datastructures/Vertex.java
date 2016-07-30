@@ -60,4 +60,8 @@ public abstract class Vertex {
 	public int hashCode(){
 		return vertexName.hashCode();
 	}
+	
+	public String toString(){
+		return getVertexName();
+	}
 }

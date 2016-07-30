@@ -1,7 +1,7 @@
 A->B,C
 B->D,E,F
-C->G,I
-D->J,K,L
-E->M,N
-F->O
-G->H,P
+C->G,H
+D->I,J,K
+E->L,M
+F->N
+G->O,P
