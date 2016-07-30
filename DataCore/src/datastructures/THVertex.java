@@ -49,4 +49,10 @@ public class THVertex extends TreeVertex {
 		return descedants.size();
 	}
 
+	@Override
+	protected TreeVertex implementAddChild(TreeVertex v) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

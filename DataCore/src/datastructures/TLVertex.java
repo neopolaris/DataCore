@@ -17,15 +17,22 @@ public class TLVertex extends TreeVertex {
 	 * 
 	 */
 	public TLVertex() {
-		this ("");
+		this ("",null);
 	}
 
 	/**
 	 * @param name
 	 */
 	public TLVertex(String name) {
+		this(name, null);
+	}
+	
+	public TLVertex(String name, TreeVertex parent){
 		super(name);
 		descendants = new ArrayList<TreeVertex>();
+		if ( parent != null ){
+			parent.addChild(this);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -44,4 +51,12 @@ public class TLVertex extends TreeVertex {
 		return descendants.size();
 	}
 
+	@Override
+	protected TreeVertex implementAddChild(TreeVertex v) {
+		if ( !descendants.contains(v)){
+			if ( descendants.add(v) )
+				return v; 
+		}
+		return null;
+	}
 }

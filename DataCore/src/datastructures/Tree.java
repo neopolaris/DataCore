@@ -3,12 +3,14 @@
  */
 package datastructures;
 
+import java.util.List;
+
 /**
  * @author aminn
  *
  */
 public abstract class Tree {
-	private TreeVertex root = null;
+	protected TreeVertex root = null;
 	private String name = "";
 
 	/**
@@ -43,21 +45,28 @@ public abstract class Tree {
 		return name;
 	}
 	
-	public void traverseDFS(){
-		implementTraverseDFS();
+	public void traverseDFS(VertexOperator v){
+		implementTraverseDFS(v);
 	}
 	
-	public void traverseBFS(){
-		implementTraverseBFS();
+	public void traverseBFS(VertexOperator v){
+		implementTraverseBFS(v);
 	}
 	
 	public TreeVertex findTreeVertex(String name){
 		return implementFindTreeVertex(name);
 	}
 	
-	protected abstract void implementTraverseBFS();
-	protected abstract void implementTraverseDFS();
+	public List<String> toStringList(){
+		return implementToStringList();
+	}
+	
+	public String toString(){
+		return implementToStringList().toString();
+	}
+	
+	protected abstract void implementTraverseBFS(VertexOperator v);
+	protected abstract void implementTraverseDFS(VertexOperator v);
 	protected abstract TreeVertex implementFindTreeVertex(String name);
-	
-	
+	protected abstract List<String> implementToStringList();
 }

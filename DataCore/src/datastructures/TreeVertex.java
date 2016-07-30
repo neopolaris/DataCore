@@ -34,6 +34,10 @@ public abstract class TreeVertex extends SimpleVertex {
 		return ( implementNeighborCount() == 0 );
 	}
 	
+	public TreeVertex addChild(TreeVertex v){
+		return ( implementAddChild(v));
+	}
+	
 	public List<TreeVertex> getNextNeighbors(){
 		if ( !isLeaf() ){
 			return implementGetNextNeighbors();
@@ -43,4 +47,5 @@ public abstract class TreeVertex extends SimpleVertex {
 	
 	protected abstract List<TreeVertex> implementGetNextNeighbors();//{ return null; };
 	protected abstract int implementNeighborCount();//{ return 0; };
+	protected abstract TreeVertex implementAddChild(TreeVertex v);
 }
