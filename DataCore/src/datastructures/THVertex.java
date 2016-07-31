@@ -55,4 +55,10 @@ public class THVertex extends TreeVertex {
 		return null;
 	}
 
+	@Override
+	protected TreeVertex implementGetChildAt(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

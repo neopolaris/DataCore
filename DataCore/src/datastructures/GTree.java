@@ -73,17 +73,25 @@ public class GTree extends Tree {
 	 * @param v - Current vertex that is being traversed.
 	 * @param op - An operator with certain operation to perform visit.
 	 */
-	private void doDFS(TreeVertex v, VertexOperator op){
+	protected void doDFS(TreeVertex v, VertexOperator op){
 		//if ( v == null ){
 		///}
 		visitPreOrder(v, op);
 		if ( !v.isLeaf() ){
-			for ( TreeVertex tVertex : v.getNextNeighbors() ){
+			List<TreeVertex> descendants = v.getNextNeighbors(); 
+			for ( int i=0; i < descendants.size(); i++ ){
+				TreeVertex tVertex = descendants.get(i);
 				doDFS(tVertex, op);
+ 
 				// Note: This only makes sense for binary trees
-				visitInOrder(v, op); 
+				if ( i == 0 ) {
+					visitInOrder(v, op);
+				}
 			}
-			
+		}
+		else {
+			// This Could really be improved
+			visitInOrder(v, op);
 		}
 		visitPostOrder(v, op);
 	}
@@ -106,7 +114,7 @@ public class GTree extends Tree {
 		}
 	}
 
-	private void doBFS(TreeVertex v, VertexOperator op){
+	protected void doBFS(TreeVertex v, VertexOperator op){
 		LinkedList<TreeVertex> q = new LinkedList<TreeVertex>();
 		q.add(v);
 		while ( !q.isEmpty() ){
@@ -118,7 +126,7 @@ public class GTree extends Tree {
 		}
 	}
 
-	private void visitVertex(TreeVertex v, VertexOperator op){
+	protected void visitVertex(TreeVertex v, VertexOperator op){
 		op.operate(v);
 	}
 	

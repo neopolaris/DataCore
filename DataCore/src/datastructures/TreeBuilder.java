@@ -11,15 +11,21 @@ import java.util.List;
  *
  */
 public class TreeBuilder extends Builder {
+	
+	public enum TreeType { generic, binary, bst };
+	
 	private List<String> eStrings = null;
 	private HashMap<String, TLVertex> vertices = null;
+	private TreeType treeType = TreeType.generic;
+	
 
 	/**
 	 * 
 	 */
-	public TreeBuilder(List<String> e) {
+	public TreeBuilder(List<String> e, TreeType type) {
 		super();
 		eStrings = e;
+		treeType = type;
 		vertices = new HashMap<String,TLVertex>();
 	}
 
@@ -72,8 +78,18 @@ public class TreeBuilder extends Builder {
 				vertices.put(chName, cVert);
 			}
 		}
-		GTree tree = new GTree(root);
-		return tree;
+		
+		return buildTree(root);
+		
 	}
 
+	private GTree buildTree(TLVertex root){
+		switch ( treeType ){
+			case generic:	return new GTree(root);
+			case binary: break;
+			case bst: return new BSTree(root);
+			default: break;
+		}
+		return null;
+	}
 }

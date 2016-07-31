@@ -7,7 +7,7 @@ package datastructures;
  * @author Vaygr
  * An abstract base class for all vertex objects
  */
-public abstract class Vertex {
+public abstract class Vertex  implements Comparable<Vertex> {
 	
 	// At the minimum, a vertex should have a name
 	protected String vertexName = "";
@@ -59,6 +59,10 @@ public abstract class Vertex {
 	 */
 	public int hashCode(){
 		return vertexName.hashCode();
+	}
+	
+	public int compareTo(Vertex v1){
+		return (this.vertexName.compareTo(v1.getVertexName()));
 	}
 	
 	public String toString(){

@@ -45,7 +45,12 @@ public abstract class TreeVertex extends SimpleVertex {
 		return null;
 	}
 	
+	public TreeVertex getChildAt(int i){
+		return implementGetChildAt(i);
+	}
+	
 	protected abstract List<TreeVertex> implementGetNextNeighbors();//{ return null; };
 	protected abstract int implementNeighborCount();//{ return 0; };
 	protected abstract TreeVertex implementAddChild(TreeVertex v);
+	protected abstract TreeVertex implementGetChildAt(int i);
 }

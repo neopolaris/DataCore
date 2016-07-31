@@ -59,4 +59,9 @@ public class TLVertex extends TreeVertex {
 		}
 		return null;
 	}
+
+	@Override
+	protected TreeVertex implementGetChildAt(int i) {
+		return descendants.get(i);
+	}
 }
