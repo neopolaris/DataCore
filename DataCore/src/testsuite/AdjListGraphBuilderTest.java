@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import datastructures.AdjListGraph;
 import datastructures.AdjListGraphBuilder;
+import datastructures.GraphVertex;
+import datastructures.VertexPathOp;
 
 /**
  * @author Vaygr
@@ -66,6 +68,18 @@ public class AdjListGraphBuilderTest {
 		
 		System.out.println(simpleGList.toString());
 		System.out.println(modGList.toString());
+		
+		// Testing Traversal
+		System.out.println("Testing DFS on simple graph ... ");
+		VertexPathOp vpOp = new VertexPathOp();
+		GraphVertex sgV = alSimpleGraph.getGraphVertex("0");
+		alSimpleGraph.traverseDFS(sgV, vpOp);
+		System.out.println(vpOp.getPath().toString());
+		
+		System.out.println("Testing BFS on simple graph ... ");
+		VertexPathOp vpOpBFS = new VertexPathOp();
+		alSimpleGraph.traverseBFS(sgV, vpOpBFS);
+		System.out.println(vpOpBFS.getPath().toString());
 	}
 
 }

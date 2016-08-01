@@ -45,7 +45,7 @@ public class AdjListGraphBuilder extends Builder {
 			String[] tokens = inputStr.split(patStr);
 			String vertStr = tokens[0];
 			String edgeStr = tokens[1];
-			SimpleVertex sVert = new SimpleVertex(vertStr); 
+			GraphVertex sVert = new GraphVertex(vertStr); 
 			graph.addVertex(sVert);
 			String[] edgeTokens = edgeStr.split(",");
 			for ( String edgeToken : edgeTokens ){
@@ -53,8 +53,8 @@ public class AdjListGraphBuilder extends Builder {
 				String[] edgeVals = edgeToken.split(":");
 				String eVertVal = edgeVals[0];
 				String wgtVal = edgeVals[1];
-				SimpleVertex eVert = new SimpleVertex(eVertVal);
-				SimpleEdge sEdge = new SimpleEdge(sVert, eVert, Double.parseDouble(wgtVal));
+				GraphVertex eVert = new GraphVertex(eVertVal);
+				GraphEdge sEdge = new GraphEdge(sVert, eVert, Double.parseDouble(wgtVal));
 				graph.addEdge(sEdge);
 			}
 		}

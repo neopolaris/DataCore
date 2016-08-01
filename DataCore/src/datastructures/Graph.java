@@ -18,7 +18,7 @@ public abstract class Graph {
 		vertexCount = 0;
 	}
 	
-	public boolean addVertex(Vertex v){
+	public boolean addVertex(GraphVertex v){
 		if ( implementAddVertex(v) ){
 			vertexCount++;
 			return true;
@@ -26,7 +26,7 @@ public abstract class Graph {
 		return false;
 	}
 	
-	public boolean addEdge(Edge e){
+	public boolean addEdge(GraphEdge e){
 		if ( implementAddEdge(e)){
 			edgeCount++;
 			return true;
@@ -34,23 +34,32 @@ public abstract class Graph {
 		return false;
 	}
 	
+	public List<GraphVertex> getNextNeighbors(GraphVertex v){
+		return implementGetNextNeighbors(v);
+	}
+	
+	public GraphVertex getGraphVertex(String name){
+		return implementGetGraphVertex(name);
+	}
+	
 	public List<String> toStringList(){
 		return implementToStringList();
 	}
 	
-	public void doDFS(Visitor v){
-		implementDoDFS(v);
+	public void traverseDFS(GraphVertex gV, VertexOperator vOp){
+		implementDoDFS(gV, vOp);
 	}
 	
-	public void doBFS(Visitor v){
-		implementDoBFS(v);
+	public void traverseBFS(GraphVertex gV, VertexOperator vOp){
+		implementDoBFS(gV, vOp);
 	}
 	
-	protected abstract void implementDoDFS(Visitor v);
-	protected abstract void implementDoBFS(Visitor v);
-	protected abstract boolean implementAddVertex(Vertex v);
-	protected abstract boolean implementAddEdge(Edge e);
-	protected abstract List<Vertex> implementGetNextNeighbors(Vertex v);
+	protected abstract void implementDoDFS(GraphVertex gV, VertexOperator v);
+	protected abstract void implementDoBFS(GraphVertex gV, VertexOperator v);
+	protected abstract boolean implementAddVertex(GraphVertex v);
+	protected abstract boolean implementAddEdge(GraphEdge e);
+	protected abstract List<GraphVertex> implementGetNextNeighbors(GraphVertex v);
 	protected abstract List<String> implementToStringList();
+	protected abstract GraphVertex implementGetGraphVertex(String name);
 
 }
