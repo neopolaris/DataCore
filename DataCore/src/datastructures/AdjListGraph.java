@@ -104,6 +104,10 @@ public class AdjListGraph extends Graph {
 	@Override
 	protected void implementDoBFS(Visitor v) {
 		// TODO Auto-generated method stub
-		
+		//doDFS(v);		
+	}
+	
+	private void doDFS(VertexOperator op){
+		// TODO
 	}
 }
