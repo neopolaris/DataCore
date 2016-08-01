@@ -49,8 +49,15 @@ public class SortAndSearchTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing Merge Sort ... ");
+		System.out.print("Original Array : ");
+		printArray(simpleArray);
 		Sort.mergeSort(simpleArray);
 		printArray(simpleArray);
+		
+		System.out.println("Testing binary search for 10... ");
+		int index = Sort.binarySearch(10, simpleArray);
+		System.out.println("Search target found at index: " + index);
 	}
 	
 	private void printArray(int[] input){
