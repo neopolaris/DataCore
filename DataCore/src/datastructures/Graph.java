@@ -34,9 +34,30 @@ public abstract class Graph {
 		return false;
 	}
 	
+	public int getVertexCount(){
+		return vertexCount;
+	}
+	
+	public int getEdgeCount(){
+		return edgeCount;
+	}
+	
 	public List<GraphVertex> getNextNeighbors(GraphVertex v){
 		return implementGetNextNeighbors(v);
 	}
+	
+	public List<GraphEdge> getEdgesToNeighbors(GraphVertex v){
+		return implementGetEdgesToNeighbors(v);
+	}
+	
+	public List<GraphVertex> getAllVertices(){
+		return implementGetAllVertices();
+	}
+
+	public GraphEdge getEdge(GraphVertex sV, GraphVertex eV){
+		return implementGetEdge(sV,eV);
+	}
+
 	
 	public GraphVertex getGraphVertex(String name){
 		return implementGetGraphVertex(name);
@@ -59,7 +80,10 @@ public abstract class Graph {
 	protected abstract boolean implementAddVertex(GraphVertex v);
 	protected abstract boolean implementAddEdge(GraphEdge e);
 	protected abstract List<GraphVertex> implementGetNextNeighbors(GraphVertex v);
+	protected abstract List<GraphEdge> implementGetEdgesToNeighbors(GraphVertex v);
 	protected abstract List<String> implementToStringList();
 	protected abstract GraphVertex implementGetGraphVertex(String name);
+	protected abstract GraphEdge implementGetEdge(GraphVertex sV, GraphVertex eV);
+	protected abstract List<GraphVertex> implementGetAllVertices();
 
 }

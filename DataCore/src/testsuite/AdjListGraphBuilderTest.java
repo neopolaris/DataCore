@@ -23,6 +23,7 @@ import datastructures.VertexPathOp;
 public class AdjListGraphBuilderTest {
 	private List<String> simpleList = null;
 	private List<String> moderateList = null;
+	private List<String> smallList = null;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -45,6 +46,7 @@ public class AdjListGraphBuilderTest {
 	public void setUp() throws Exception {
 		simpleList = DataLoader.LoadData("testdata/graph/simple_digraph.txt");
 		moderateList = DataLoader.LoadData("testdata/graph/moderate_udigraph.txt");
+		smallList = DataLoader.LoadData("testdata/graph/small_digraph.txt");
 	}
 
 	/**
@@ -57,17 +59,25 @@ public class AdjListGraphBuilderTest {
 	@Test
 	public void test() {
 		// Testing a simple directed weighted graph
+		System.out.println("Building a simple adjacency list directed graph ... ");
 		AdjListGraphBuilder algSimpleBuilder = new AdjListGraphBuilder(simpleList);
 		AdjListGraph alSimpleGraph = algSimpleBuilder.build();
 		List<String> simpleGList = alSimpleGraph.toStringList();
+		System.out.println(simpleGList.toString());
 		
 		// Testing a slightly more complex un directed weighted graph
+		System.out.println("Building a moderate size adjacency list undirected graph ... ");
 		AdjListGraphBuilder algModBuilder = new AdjListGraphBuilder(moderateList);
 		AdjListGraph alModGraph = algModBuilder.build();
 		List<String> modGList = alModGraph.toStringList();
-		
-		System.out.println(simpleGList.toString());
 		System.out.println(modGList.toString());
+		
+		// Testing a slightly more complex un directed weighted graph
+		System.out.println("Building a small size adjacency list directed graph ... ");
+		AdjListGraphBuilder algSmallBuilder = new AdjListGraphBuilder(smallList);
+		AdjListGraph alSmallGraph = algSmallBuilder.build();
+		List<String> smallGList = alSmallGraph.toStringList();		
+		System.out.println(smallGList.toString());
 		
 		// Testing Traversal
 		System.out.println("Testing DFS on simple graph ... ");

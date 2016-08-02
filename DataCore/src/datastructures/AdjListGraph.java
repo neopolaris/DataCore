@@ -6,6 +6,7 @@ package datastructures;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -99,7 +100,10 @@ public class AdjListGraph extends Graph {
 
 	@Override
 	protected void implementDoDFS(GraphVertex gV, VertexOperator vOp) {
-		doDFS(gV,vOp);
+		HashSet<GraphVertex> visited = new HashSet<GraphVertex>();
+		for ( GraphVertex graphV : edgeList.keySet() ){
+			doDFS(graphV,vOp, visited);
+		}
 	}
 
 	@Override
@@ -117,22 +121,27 @@ public class AdjListGraph extends Graph {
 				vOp.operate(curVertex);
 				List<GraphVertex> neighbors = getNextNeighbors(curVertex);
 				vertexQ.addAll(neighbors);
+				visited.add(curVertex);
 			}
-			visited.add(curVertex);
 		}
 	}
 
-	private void doDFS(GraphVertex gV, VertexOperator op){
+	private void doDFS(GraphVertex gV, VertexOperator op, HashSet<GraphVertex> visited){
 		// TODO still needs refinement for visitor operation so that
 		// it doesn't operate on those that were already visited.
+		// Also needs to split pre-order and post order operations
 		if ( gV == null ){
 			return;
 		}
 		else {
-			op.operate(gV);
-			List<GraphVertex> neighbors = this.getNextNeighbors(gV);
-			for ( GraphVertex nV : neighbors ){
-				doDFS(nV, op);
+			
+			if ( !visited.contains(gV)){
+				List<GraphVertex> neighbors = this.getNextNeighbors(gV);
+				for ( GraphVertex nV : neighbors ){
+					doDFS(nV, op, visited);
+				}
+				op.operate(gV);
+				visited.add(gV);
 			}
 		}
 	}
@@ -143,6 +152,31 @@ public class AdjListGraph extends Graph {
 		for ( GraphVertex tgV : edgeList.keySet() ){
 			if ( tgV.equals(gV)){
 				return tgV;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	protected List<GraphEdge> implementGetEdgesToNeighbors(GraphVertex v) {
+		HashSet<GraphEdge> edges = (HashSet<GraphEdge>)edgeList.get(v);
+		return new ArrayList<GraphEdge>(edges);
+	}
+
+	@Override
+	protected List<GraphVertex> implementGetAllVertices() {
+		return new ArrayList<GraphVertex>(edgeList.keySet());
+	}
+
+	@Override
+	protected GraphEdge implementGetEdge(GraphVertex sV, GraphVertex eV) {
+		Set<GraphEdge> edges = edgeList.get(sV);
+		Iterator<GraphEdge> iter = edges.iterator();
+		while (iter.hasNext()){
+			GraphEdge gE = iter.next();
+			Vertex oV = gE.getOtherVertex(sV);
+			if ( oV.equals(eV)){
+				return gE;
 			}
 		}
 		return null;

@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @author Vaygr
  *
  */
-public class SimpleEdge extends Edge {
+public class SimpleEdge extends Edge implements Comparable<SimpleEdge> {
 	
 	// A lookup table for properties associated with an edge.
 	private HashMap<String,Object> property = null;
@@ -86,6 +86,11 @@ public class SimpleEdge extends Edge {
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	public int compareTo(SimpleEdge o) {
+		return ( Double.compare(this.getWeight(), o.getWeight()));
 	}
 
 }
