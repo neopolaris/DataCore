@@ -139,6 +139,11 @@ public class Sort {
 		// TODO: Implement quick sort.
 	}
 	
+	public static int rabinKarp(String input, String pattern){
+		// TODO: Implement this method
+		return -1;
+	}
+	
 	public static int binarySearch(int target, int[] input){
 		return binarySearch(0,input.length-1, target, input);
 	}
@@ -167,8 +172,6 @@ public class Sort {
 		input[i] = input[minIdx];
 		input[minIdx] = holder;
 	}
-
-	
 	
 	
 
