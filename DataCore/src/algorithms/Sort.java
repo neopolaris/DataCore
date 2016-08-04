@@ -139,34 +139,6 @@ public class Sort {
 		// TODO: Implement quick sort.
 	}
 	
-	public static int rabinKarp(String input, String pattern){
-		// TODO: Implement this method
-		return -1;
-	}
-	
-	public static int binarySearch(int target, int[] input){
-		return binarySearch(0,input.length-1, target, input);
-	}
-	
-	private static int binarySearch(int low, int high, int target, int[] input){
-		if ( low > high ){
-			return -1;
-		}
-		else {
-			int mid = ( low + high ) / 2;
-			if ( target == input[mid] ){
-				return mid;
-			}
-			else if ( target < input[mid] ){
-				return binarySearch( low, mid, target, input);
-			}
-			else if ( target > input[mid] ){
-				return binarySearch( mid+1, high, target, input);
-			}
-		}
-		return -1;
-	}
-	
 	private static void swapArrayElements(int i, int minIdx, int[] input) {
 		int holder = input[i];
 		input[i] = input[minIdx];

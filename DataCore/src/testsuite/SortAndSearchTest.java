@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import algorithms.Search;
 import algorithms.Sort;
 
 /**
@@ -56,7 +57,7 @@ public class SortAndSearchTest {
 		printArray(simpleArray);
 		
 		System.out.println("Testing binary search for 10... ");
-		int index = Sort.binarySearch(10, simpleArray);
+		int index = Search.binarySearch(10, simpleArray);
 		System.out.println("Search target found at index: " + index);
 	}
 	

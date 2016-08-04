@@ -53,6 +53,16 @@ public class GraphAlgorithms {
 		return false;
 	}
 	
+	public static List<Vertex> connectedComponents(){
+		// TODO: Implement connectedComponents;
+		return null;
+	}
+	
+	public static List<Vertex> eulerianPath(){
+		// TODO: Implement Eulerian Path
+		return null;
+	}
+	
 	public static List<Vertex> singleSourceShortestPath(Graph g, String svName, String tvName) {
 		
 		//VertexPathOp vpOp = new VertexPathOp();
@@ -111,9 +121,10 @@ public class GraphAlgorithms {
 		}
 	}
 	
+	
+	
 	// TODO: Add static method for checking if a graph has disconnected components.
 	// TODO: Add minimum spanning tree method.
-	// TODO: Add Dijkstra method.
 	// TODO: Add Single Source Shortest Path.
 	// TODO: Add Manhattan tourist
 	// TODO: Add TSP
