@@ -100,7 +100,7 @@ public class GraphAlgorithmsTest {
 	public void testConnectedComponents() {
 		// Testing connected components in a graph.
 		System.out.println("Testing connected components ....");
-		AdjListGraphBuilder algUSSBuilder = new AdjListGraphBuilder(medList);
+		AdjListGraphBuilder algUSSBuilder = new AdjListGraphBuilder(ussList);
 		AdjListGraph alUssGraph = algUSSBuilder.build();
 		List<String> ussGList = alUssGraph.toStringList();		
 		System.out.println(ussGList.toString());

@@ -6,6 +6,7 @@ package algorithms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.collect.MinMaxPriorityQueue;
@@ -56,14 +57,36 @@ public class GraphAlgorithms {
 	}
 	
 	public static int connectedComponents(Graph g){
-		// Do a DFS traversal
-		Integer comNo = 0;
-		VertexPropertyOp pptyOp = new VertexPropertyOp(VertexProperties.ComponentNo, comNo);
-		g.traverseDFS(g.getFirstVertex(), pptyOp);
 		
-		GVConnectionOp gvConOp = new GVConnectionOp(); 
-		g.traverseDFS(g.getFirstVertex(), gvConOp);
-		return gvConOp.getComponentCount();	
+		// Initialize starting component number and map to keep track of these ID.
+		Integer comNo = 1;
+		List<GraphVertex> graphVertices = g.getAllVertices();
+		HashMap<GraphVertex, Integer> vertexCompMap = new HashMap<GraphVertex, Integer>();
+		GraphVertex gV = g.getFirstVertex();
+		
+		while ( gV != null ){
+			// Do a DFS traversal and set all vertices to current component number.
+			VertexPropertyOp pptyOp = new VertexPropertyOp(VertexProperties.ComponentNo, comNo);
+			g.traverseDFS(gV, pptyOp);
+			
+			for ( Vertex v : pptyOp.getPath()){
+				vertexCompMap.put((GraphVertex)v, comNo);
+			}
+	
+			// Find next GraphVertex that is not in the component list
+			boolean found = false;
+			gV = null;
+			Iterator<GraphVertex> iter = graphVertices.iterator();
+			while ( iter.hasNext() && !found ){
+				GraphVertex tV = iter.next();
+				if ( !vertexCompMap.containsKey(tV)){
+					gV = tV;
+					found = true;
+					comNo++;
+				}
+			}
+		}
+		return comNo;
 	}
 	
 	public static List<Vertex> eulerianPath(){
