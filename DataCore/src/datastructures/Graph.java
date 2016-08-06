@@ -58,6 +58,9 @@ public abstract class Graph {
 		return implementGetEdge(sV,eV);
 	}
 
+	public GraphVertex getFirstVertex(){
+		return implementGetFistVertex();
+	}
 	
 	public GraphVertex getGraphVertex(String name){
 		return implementGetGraphVertex(name);
@@ -85,5 +88,5 @@ public abstract class Graph {
 	protected abstract GraphVertex implementGetGraphVertex(String name);
 	protected abstract GraphEdge implementGetEdge(GraphVertex sV, GraphVertex eV);
 	protected abstract List<GraphVertex> implementGetAllVertices();
-
+	protected abstract GraphVertex implementGetFistVertex();
 }

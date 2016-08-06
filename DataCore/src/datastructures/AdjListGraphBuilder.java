@@ -43,19 +43,55 @@ public class AdjListGraphBuilder extends Builder {
 			// The remaining parts will be end vertex of the edge and corresponding weight.
 			String patStr = "->";
 			String[] tokens = inputStr.split(patStr);
-			String vertStr = tokens[0];
-			String edgeStr = tokens[1];
-			GraphVertex sVert = new GraphVertex(vertStr); 
-			graph.addVertex(sVert);
-			String[] edgeTokens = edgeStr.split(",");
-			for ( String edgeToken : edgeTokens ){
-				// Now split it using ":"
-				String[] edgeVals = edgeToken.split(":");
-				String eVertVal = edgeVals[0];
-				String wgtVal = edgeVals[1];
-				GraphVertex eVert = new GraphVertex(eVertVal);
-				GraphEdge sEdge = new GraphEdge(sVert, eVert, Double.parseDouble(wgtVal));
-				graph.addEdge(sEdge);
+			String vertStr = "";
+			String edgeStr = "";
+			
+			// Check if the vertex is a leaf and build it accordingly.
+			if ( tokens.length > 0 ){
+				vertStr = tokens[0];
+			}
+			if ( tokens.length > 1 ){
+				edgeStr = tokens[1];
+			}
+			
+			// Add a new vertex with the string name if the name is not blank.
+			if ( !vertStr.isEmpty() ){
+				GraphVertex sVert = new GraphVertex(vertStr); 
+				graph.addVertex(sVert);
+			
+			
+				// If if the trailing nodes are blank then we just have a leaf vertex.
+				if ( !edgeStr.isEmpty() ) {
+				String[] edgeTokens = edgeStr.split(",");
+					for ( String edgeToken : edgeTokens ){
+						// Now split it using ":"
+						String[] edgeVals = edgeToken.split(":");				
+						String eVertVal = "";
+						String wgtVal = "";
+						
+						// Check if the edges has weights and parse it accordingly
+						if ( edgeVals.length > 0 ){
+							eVertVal = edgeVals[0];
+						}
+						if ( edgeVals.length > 1 ){
+							wgtVal = edgeVals[1];
+						}
+						
+						// If ending vertex name is not empty.
+						if ( !eVertVal.isEmpty() ) {
+							GraphVertex eVert = new GraphVertex(eVertVal);
+							Double weight = 0.0;
+							try {
+								weight = Double.parseDouble(wgtVal);
+							}
+							catch ( NumberFormatException ex ){
+								weight = 0.0;
+							}
+							GraphEdge sEdge = new GraphEdge(sVert, eVert, weight);
+							graph.addEdge(sEdge);
+						}
+					}
+				}
 			}
 		}
 		return graph;

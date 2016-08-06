@@ -25,6 +25,7 @@ import datastructures.Vertex;
 public class GraphAlgorithmsTest {
 	private List<String> smallList = null;
 	private List<String> medList = null;
+	private List<String> ussList = null;
 
 	/**
 	 * @throws java.lang.Exception
@@ -47,6 +48,7 @@ public class GraphAlgorithmsTest {
 	public void setUp() throws Exception {
 		smallList = DataLoader.LoadData("testdata/graph/small_digraph.txt");
 		medList = DataLoader.LoadData("testdata/graph/medium_digraph.txt");
+		ussList = DataLoader.LoadData("testdata/graph/us_states_graph.txt");
 	}
 
 	/**
@@ -92,6 +94,18 @@ public class GraphAlgorithmsTest {
 		System.out.println(medGList.toString());
 		List<Vertex> dijkstraResults = GraphAlgorithms.singleSourceShortestPath(alMedGraph, "0", "7");
 		System.out.println("Shortest Path: " + dijkstraResults.toString());
+	}
+	
+	@Test
+	public void testConnectedComponents() {
+		// Testing connected components in a graph.
+		System.out.println("Testing connected components ....");
+		AdjListGraphBuilder algUSSBuilder = new AdjListGraphBuilder(medList);
+		AdjListGraph alUssGraph = algUSSBuilder.build();
+		List<String> ussGList = alUssGraph.toStringList();		
+		System.out.println(ussGList.toString());
+		int componentCount = GraphAlgorithms.connectedComponents(alUssGraph);
+		System.out.println("There are total of : " + componentCount + " components in this graph.");
 	}
 
 }

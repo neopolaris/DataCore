@@ -3,17 +3,21 @@
  */
 package datastructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Vaygr
  *
  */
-public class BackTrackVisitor extends Visitor {
+public abstract class BackTrackVisitor extends Visitor {
+	 
 
 	/**
 	 * 
 	 */
 	public BackTrackVisitor() {
-		// TODO Auto-generated constructor stub
+		// TODO: Nothing to do here.
 	}
 
 	/* (non-Javadoc)
@@ -29,5 +33,30 @@ public class BackTrackVisitor extends Visitor {
 		// TODO: Implement exit early;
 		return false;
 	}
-
+	 
+	public void processSolution(List<Object> curSet, int curIdx){
+		implementProcess(curSet, curIdx);
+	}
+	
+	public boolean isSolution(List<Object> curSet, int curIdx){
+		return implementIsSolution(curSet, curIdx);
+	}
+	
+	public List<Object> getNextCandidates(List<Object> curSet, int curIdx){
+		return implementGetNextCandidates(curSet, curIdx);
+	}
+	
+	public void makeMove(List<Object> curSet, int curIdx){
+		implementMakeMove(curSet, curIdx);
+	}
+	
+	public void undoMove(List<Object> curSet, int curIdx){
+		implementMakeMove(curSet, curIdx);
+	}
+	
+	protected abstract boolean implementIsSolution(List<Object> curSet, int curIdx);
+	protected abstract List<Object> implementGetNextCandidates(List<Object> curSet, int curIdx);
+	protected abstract void implementMakeMove(List<Object> curSet, int curIdx);
+	protected abstract void implementUndoMove(List<Object> curSet, int curIdx);
+	protected abstract void implementProcess(List<Object> curSet, int curIdx);
 }

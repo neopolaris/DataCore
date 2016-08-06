@@ -14,6 +14,8 @@ import datastructures.GraphEdge;
 import datastructures.GraphVertex;
 import datastructures.Vertex;
 import datastructures.VertexPathOp;
+import datastructures.VertexProperties;
+import datastructures.VertexPropertyOp;
 
 /**
  * @author Vaygr
@@ -53,9 +55,15 @@ public class GraphAlgorithms {
 		return false;
 	}
 	
-	public static List<Vertex> connectedComponents(){
-		// TODO: Implement connectedComponents;
-		return null;
+	public static int connectedComponents(Graph g){
+		// Do a DFS traversal
+		Integer comNo = 0;
+		VertexPropertyOp pptyOp = new VertexPropertyOp(VertexProperties.ComponentNo, comNo);
+		g.traverseDFS(g.getFirstVertex(), pptyOp);
+		
+		GVConnectionOp gvConOp = new GVConnectionOp(); 
+		g.traverseDFS(g.getFirstVertex(), gvConOp);
+		return gvConOp.getComponentCount();	
 	}
 	
 	public static List<Vertex> eulerianPath(){

@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import algorithms.GVConnectionOp;
+
 /**
  * @author Vaygr
  * Adjacency List implementation of undirected Graph
@@ -101,8 +103,16 @@ public class AdjListGraph extends Graph {
 	@Override
 	protected void implementDoDFS(GraphVertex gV, VertexOperator vOp) {
 		HashSet<GraphVertex> visited = new HashSet<GraphVertex>();
-		for ( GraphVertex graphV : edgeList.keySet() ){
-			doDFS(graphV,vOp, visited);
+		//for ( GraphVertex graphV : edgeList.keySet() ){
+		//	doComponentOpertations(graphV, vOp); // This is where graph will move to next disconnected component.
+			doDFS(gV,vOp, visited);
+		//}
+	}
+
+	private void doComponentOpertations(GraphVertex graphV, VertexOperator vOp) {
+		if ( vOp instanceof GVConnectionOp ){
+			GVConnectionOp gvConOp = (GVConnectionOp)vOp;
+			gvConOp.incrementComNo();
 		}
 	}
 
@@ -136,12 +146,15 @@ public class AdjListGraph extends Graph {
 		else {
 			
 			if ( !visited.contains(gV)){
+				visited.add(gV);
+				System.out.print("In Vertex : " + gV.getVertexName());
 				List<GraphVertex> neighbors = this.getNextNeighbors(gV);
 				for ( GraphVertex nV : neighbors ){
+					System.out.println(" -> Going deep on : " + nV.getVertexName());
 					doDFS(nV, op, visited);
 				}
 				op.operate(gV);
-				visited.add(gV);
+				
 			}
 		}
 	}
@@ -180,5 +193,11 @@ public class AdjListGraph extends Graph {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	protected GraphVertex implementGetFistVertex() {
+		Iterator<GraphVertex> iter = edgeList.keySet().iterator();
+		return iter.next();
 	}
 }

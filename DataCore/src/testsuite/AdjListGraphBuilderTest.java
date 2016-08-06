@@ -24,6 +24,7 @@ public class AdjListGraphBuilderTest {
 	private List<String> simpleList = null;
 	private List<String> moderateList = null;
 	private List<String> smallList = null;
+	private List<String> usStatesList = null;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -47,6 +48,7 @@ public class AdjListGraphBuilderTest {
 		simpleList = DataLoader.LoadData("testdata/graph/simple_digraph.txt");
 		moderateList = DataLoader.LoadData("testdata/graph/moderate_udigraph.txt");
 		smallList = DataLoader.LoadData("testdata/graph/small_digraph.txt");
+		usStatesList = DataLoader.LoadData("testdata/graph/us_states_graph.txt");
 	}
 
 	/**
@@ -79,6 +81,14 @@ public class AdjListGraphBuilderTest {
 		List<String> smallGList = alSmallGraph.toStringList();		
 		System.out.println(smallGList.toString());
 		
+		// Testing a complex undirected and un-weighted graph of States in US.
+		System.out.println("Building a complex adjacency list directed graph of US States ... ");
+		AdjListGraphBuilder algUsStatesBuilder = new AdjListGraphBuilder(usStatesList);
+		AdjListGraph alUsStatesGraph = algUsStatesBuilder.build();
+		List<String> usStatesGList = alUsStatesGraph.toStringList();
+		System.out.println("There are total of : " + usStatesGList.size());
+		System.out.println(usStatesGList.toString());
+		
 		// Testing Traversal
 		System.out.println("Testing DFS on simple graph ... ");
 		VertexPathOp vpOp = new VertexPathOp();
@@ -90,6 +100,12 @@ public class AdjListGraphBuilderTest {
 		VertexPathOp vpOpBFS = new VertexPathOp();
 		alSimpleGraph.traverseBFS(sgV, vpOpBFS);
 		System.out.println(vpOpBFS.getPath().toString());
+		
+		System.out.println("Testing DFS on US-States graph ... ");
+		VertexPathOp ussOp = new VertexPathOp();
+		GraphVertex ussgV = alUsStatesGraph.getFirstVertex();
+		alUsStatesGraph.traverseDFS(ussgV, ussOp);
+		System.out.println((ussOp.getPath().toString()));
 	}
 
 }
