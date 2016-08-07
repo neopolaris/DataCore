@@ -2,6 +2,7 @@ package algorithms;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.HashMap;
 import java.util.List;
 
 public class SetAlgorithms {
@@ -44,6 +45,88 @@ public class SetAlgorithms {
 	public static void setCover() {
 		
 	} 
+	
+	public static int minSumSubSet(int[] d, int total){
+		HashMap<Integer, Integer> minCache = new HashMap<Integer,Integer>();
+		minCache.put(0,0);
+		for ( int m = 1; m <= total; m++){
+			// Given the items in the set d.
+			int w = Integer.MAX_VALUE;
+			for ( int i=0; i < d.length; i++){				
+				if ( m >= d[i] ){ // Cannot divide (or change) evenly by i-th denomination
+					int tW = minCache.get(m - d[i]) + 1;
+					if ( tW < w ){
+						w = tW;
+					}
+				}
+			}
+			minCache.put(m, w);
+		}
+		return minCache.get(total);
+	}
+	
+	public static int numSubSetsSum(int[] d, int total){
+		// Columns represents running total & rows represents
+		// each elements from the set so far.
+		int[][] dpSolMatrix = new int[d.length+1][total+1];
+		
+		// There is only one way to sum up to a zero total
+		// by doing exactly nothing.
+		for ( int i=0; i <= d.length; i++ ){
+			dpSolMatrix[i][0] = 1;
+		}
+		
+		// There is no way to sum up to zero if there is 
+		// no elements to sum up from.
+		for ( int i=0; i < total+1; i++){
+			dpSolMatrix[0][i] = 0;
+		}
+		
+		for ( int i=1; i <= d.length; i++ ){
+			for ( int N=1; N <= total; N++ ){
+				if ( d[i-1] <= N ){
+					dpSolMatrix[i][N] = dpSolMatrix[i-1][N] + dpSolMatrix[i][N - d[i-1]];
+				}
+				else {
+					// Current element is too large to sum up to N
+					// So, number of ways is still the same as
+					// those summed up from previous element(s) 
+					dpSolMatrix[i][N] = dpSolMatrix[i-1][N];
+				}
+			}
+		}
+		return dpSolMatrix[d.length][total];
+	}
+	
+	public static boolean isSubSetSum(int[] e, int sum){
+		boolean[][] dpSolMatrix = new boolean[e.length+1][sum+1];
+		
+		// If sum is zero, then there is 1 way. Return empty set.
+		for ( int i=0; i < e.length; i++){
+			dpSolMatrix[i][0] = true;
+		}
+		
+		// If there are no elements, then there is just no way.
+		for ( int i=1; i <= sum; i++){
+			dpSolMatrix[0][i] = false;
+		}
+		
+		for ( int i=1; i <= e.length; i++){
+			for ( int S=1; S <= sum; S++){
+				
+				// First copy the value from row above.
+				dpSolMatrix[i][S] = dpSolMatrix[i-1][S];
+				
+				// If no elements before can sum up to S and S must be 
+				// greater than or equal to current element.
+				if ( dpSolMatrix[i][S] == false && S >= e[i-1]){
+					dpSolMatrix[i][S] = dpSolMatrix[i][S] || dpSolMatrix[i-1][S-e[i-1]];
+				}
+			}
+		}
+		return dpSolMatrix[e.length][sum];
+		
+	}
 	
 	public static void main(String args[]) {
 		
