@@ -70,8 +70,38 @@ public class DPAlgorithms {
 		return dpMatrix[s2.length()][s1.length()];
 	}
 	
+	public static int editDistance(String s1, String s2, int[][] btSolMatrix ){
+		int[][] dpMatrix = new int[s2.length()+1][s1.length()+1];
+		
+		// First column, S1 is empty. In this case the only way to
+		// mutate the S2 is to remove everything in S2.
+		for ( int i=0; i < s2.length()+1; i++ ) {
+			dpMatrix[i][0] = i;
+		}
+		
+		// First row, S2 is empty. In this case the only way to mutate
+		// S1 is to insert everything from S1.
+		for ( int i=0; i < s1.length()+1; i++){
+			dpMatrix[0][i] = i;
+		}
+		
+		for ( int i=1; i <= s2.length(); i++ ){
+			for ( int j=1; j <= s1.length(); j++ ){
+				if ( s2.codePointAt(i-1) == s1.codePointAt(j-1)){
+					dpMatrix[i][j] = dpMatrix[i-1][j-1];
+				}
+				else {
+					dpMatrix[i][j] = 1 + Math.min(dpMatrix[i][j-1], 	// Insertion
+									     Math.min(dpMatrix[i-1][j],		// Deletion
+									              dpMatrix[i-1][j-1] ));// Mutation
+				} 
+			}
+		}
+		return dpMatrix[s2.length()][s1.length()];
+	}
+	
 	public static void main(String [] args){
-		int fibLoc = 43;
+		int fibLoc = 10;
 		System.out.println("Testing fibonacci number generation using recursion ... ");
 		int fibNumRecur = DPAlgorithms.fibonacciNumbersRecursion(fibLoc);
 		System.out.printf("The %d Fibonaccci number is : %d \n", fibLoc, fibNumRecur);
@@ -85,7 +115,14 @@ public class DPAlgorithms {
 		String s2 = "ACBDEA";
 		int[][] solMatrix = new int[s2.length()][s1.length()];
 		int lcsLength = DPAlgorithms.longestCommonSubsequence(s1, s2, solMatrix );
-		System.out.printf("The Anser is " + lcsLength);
+		System.out.println("The Anser is " + lcsLength);
+		
+		System.out.println("Testing edit distance ... ");
+		s1 = "horizontal";
+		s2 = "horizon";
+		int[][] solMatrix1 = new int[s2.length()][s1.length()];
+		int distance = DPAlgorithms.editDistance(s1, s2, solMatrix1 );
+		System.out.println("The Anser is " + distance);
 		
 	}
 }

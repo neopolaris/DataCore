@@ -128,6 +128,35 @@ public class SetAlgorithms {
 		
 	}
 	
+	public static int maxSubArrayKadane(int[] array){
+		int max_sofar = 0; 
+		int max_endhere = 0;
+		
+		for ( int i=0; i < array.length; i++ ){
+			int curE = array[i];
+			max_endhere = max_endhere + curE;
+			if ( max_endhere < 0 ){
+				max_endhere = 0;
+			}
+			if ( max_sofar < max_endhere ){
+				max_sofar = max_endhere;
+			}
+		}
+		return max_sofar;
+	}
+	
+	public static int maxSubArrayKadaneMod(int[] array){
+		int max_sofar = array[0]; 
+		int max_endhere = array[0];
+		
+		for ( int i=0; i < array.length; i++ ){
+			int curE = array[i];
+			max_endhere = Math.max(curE, (max_endhere + curE));
+			max_sofar = Math.max(max_endhere, max_sofar);
+		}
+		return max_sofar;
+	}
+	
 	public static void main(String args[]) {
 		
 		ArrayList<Integer> set = new ArrayList<Integer>();

@@ -109,6 +109,18 @@ public class SetAlgorithmsTest {
 		System.out.println(solution);
 	}
 	
+	@Test
+	public void testMaxSubArrayKadane(){
+		System.out.println("Testing Maximum Contiguous sub-array with at least 1 positive integer...");
+		int[] e = new int[] {  -2, 1, -3, 4, -1, 2, 1 };
+		int maxSum = SetAlgorithms.maxSubArrayKadane(e);
+		System.out.println("Max sum is : " + maxSum);
+		
+		System.out.println("Testing Maximum Contiguous sub-array with at least 1 positive integer...");
+		int[] n = new int[] {  -2, -3, -4, -2, -7, -2, -3,-11 };
+		maxSum = SetAlgorithms.maxSubArrayKadaneMod(n);
+		System.out.println("Max sum is : " + maxSum);
+	}
 	/**
 	 * Test method for {@link algorithms.SetAlgorithms#main(java.lang.String[])}.
 	 */
